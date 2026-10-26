@@ -4,6 +4,20 @@
   --orange: #f57c0a;
   --pink: #cc335a;
   --dark-orange: #934b06;
+  --bouncy-easing: linear(
+    0,
+    0.2 10%,
+    0.55 22%,
+    0.91 34%,
+    1.13 46%,
+    1.16 54%,
+    1.08 64%,
+    0.98 75%,
+    0.94 82%,
+    0.98 90%,
+    1.02 96%,
+    1
+  );
   --page-width: 1440px;
   --font-body: "Inter", Arial, sans-serif;
 }
@@ -250,21 +264,27 @@ main,
   min-height: 55px;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1rem;
-  border: 3px solid var(--pink);
-  border-radius: 7px;
+  padding: 0 1rem;
+  border: 5px solid var(--pink);
+  border-radius: 10px;
   color: var(--pink);
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  line-height: 1;
+  line-height: normal;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+  transition:
+    background-color 958ms var(--bouncy-easing),
+    border-color 958ms var(--bouncy-easing),
+    color 958ms var(--bouncy-easing);
 }
 
-.outline-button:hover {
-  background: var(--pink);
+.outline-button:hover,
+.outline-button:focus-visible {
+  background: var(--orange);
+  border-color: transparent;
   color: var(--cream);
 }
 
@@ -340,6 +360,18 @@ main,
   scroll-padding-inline-start: 70px;
   scrollbar-width: none;
   scroll-snap-type: x mandatory;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.content__track.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
+.content__track.is-dragging * {
+  pointer-events: none;
 }
 
 .content__track::-webkit-scrollbar {
@@ -433,19 +465,29 @@ main,
   align-items: center;
   justify-content: center;
   transform: translateX(50%);
-  border-radius: 8px;
+  border: 5px solid transparent;
+  border-radius: 10px;
   background: var(--orange);
   box-shadow: 0 7px 4px -1px var(--pink);
   color: var(--cream);
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-decoration: none;
   text-transform: uppercase;
+  transition:
+    background-color 200ms ease-out,
+    border-color 200ms ease-out,
+    box-shadow 200ms ease-out,
+    color 200ms ease-out;
 }
 
-.primary-button:hover {
-  background: var(--pink);
+.primary-button:hover,
+.primary-button:focus-visible {
+  border-color: var(--pink);
+  background: transparent;
+  box-shadow: none;
+  color: var(--pink);
 }
 
 .site-footer {
